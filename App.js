@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View, ImageBackground, SafeAreaView } from 'react-native';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { StatusBar } from 'expo-status-bar';
 
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
@@ -43,20 +44,23 @@ export default function App() {
     }
 
     if (gameIsOver && userNumber) {
-        screen = <GameOverScreen userNumber={userNumber} roundsNumber={guessRounds} onStartNewGame={startNewGameHandler}/>
+        screen = <GameOverScreen userNumber={userNumber} roundsNumber={guessRounds} onStartNewGame={startNewGameHandler} />
     }
 
     return (
-        <View style={styles.rootScreen}>
-            <ImageBackground
-                source={require('./assets/images/background.png')}
-                resizeMode='cover'
-                style={styles.rootScreen}
-                imageStyle={styles.backgroundImage}
-            >
-                <SafeAreaView style={styles.areaView}>{screen}</SafeAreaView>
-            </ImageBackground>
-        </View>
+        <>
+            <StatusBar style='light' />
+            <View style={styles.rootScreen}>
+                <ImageBackground
+                    source={require('./assets/images/background.png')}
+                    resizeMode='cover'
+                    style={styles.rootScreen}
+                    imageStyle={styles.backgroundImage}
+                >
+                    <SafeAreaView style={styles.areaView}>{screen}</SafeAreaView>
+                </ImageBackground>
+            </View>
+        </>
     );
 }
 
